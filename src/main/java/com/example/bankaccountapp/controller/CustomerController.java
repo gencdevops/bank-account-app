@@ -30,7 +30,10 @@ public class CustomerController {
        return ResponseEntity.ok(customerService.getAllCustomers());
     }
 
-  
+    @GetMapping("/{id}")
+    public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable String id) {
+    return ResponseEntity.ok(customerService.getCustomerById(id));
+    }
 
 
 

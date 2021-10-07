@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,6 +44,12 @@ public class CustomerService {
         return customerList.stream()
                 .map(customerDtoConverter::toCustomerDTO)
                 .collect(Collectors.toList());
+    }
+
+    public CustomerDTO getCustomerById(String id) {
+        Optional<Customer> customerOpt = customerRepository.findById(id);
+       return customerOpt.map(customerDtoConverter::toCustomerDTO)
+               .orElse(new CustomerDTO());
     }
 
 }
