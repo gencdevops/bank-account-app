@@ -1,20 +1,25 @@
 package com.example.bankaccountapp.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class CreateCustomerRequest {
-
+public class CreateCustomerRequest extends BaseCustomerRequest{
     private String id;
-    private String name;
-    private Integer dateOfBirth;
-    private CityDTO city;
-    private String address;
+    public CreateCustomerRequest() {
 
+    }
+
+    public CreateCustomerRequest(String id) {
+        this.id = id;
+    }
+
+    public CreateCustomerRequest(String name, Integer dateOfBirth, CityDTO city, String address, String id) {
+        super(name, dateOfBirth, city, address);
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

@@ -41,5 +41,13 @@ public class CustomerController {
        return ResponseEntity.ok().build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<CustomerDTO> updateCustomer(@PathVariable String id,
+                                                      @RequestBody CreateCustomerRequest createCustomer) {
+
+    }
+
+
+
 
 }
