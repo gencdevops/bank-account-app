@@ -7,6 +7,7 @@ import com.example.bankaccountapp.dto.CustomerDTO;
 import com.example.bankaccountapp.model.City;
 import com.example.bankaccountapp.model.Customer;
 import com.example.bankaccountapp.repository.CustomerRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -50,6 +51,11 @@ public class CustomerService {
         Optional<Customer> customerOpt = customerRepository.findById(id);
        return customerOpt.map(customerDtoConverter::toCustomerDTO)
                .orElse(new CustomerDTO());
+    }
+
+    public void deleteCustomer(String id) {
+    customerRepository.deleteById(id);
+
     }
 
 }
