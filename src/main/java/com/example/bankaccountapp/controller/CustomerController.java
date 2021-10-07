@@ -2,6 +2,7 @@ package com.example.bankaccountapp.controller;
 
 import com.example.bankaccountapp.dto.CreateCustomerRequest;
 import com.example.bankaccountapp.dto.CustomerDTO;
+import com.example.bankaccountapp.dto.UpdateCustomerRequest;
 import com.example.bankaccountapp.service.CustomerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,8 +44,8 @@ public class CustomerController {
 
     @PutMapping("/{id}")
     public ResponseEntity<CustomerDTO> updateCustomer(@PathVariable String id,
-                                                      @RequestBody CreateCustomerRequest createCustomer) {
-
+                                                      @RequestBody UpdateCustomerRequest updateCustomerRequest) {
+    return ResponseEntity.ok(customerService.updateCustomer(id, updateCustomerRequest));
     }
 
 

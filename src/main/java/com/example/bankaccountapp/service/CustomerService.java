@@ -4,6 +4,7 @@ import com.example.bankaccountapp.converter.CustomerDtoConverter;
 import com.example.bankaccountapp.dto.CityDTO;
 import com.example.bankaccountapp.dto.CreateCustomerRequest;
 import com.example.bankaccountapp.dto.CustomerDTO;
+import com.example.bankaccountapp.dto.UpdateCustomerRequest;
 import com.example.bankaccountapp.model.City;
 import com.example.bankaccountapp.model.Customer;
 import com.example.bankaccountapp.repository.CustomerRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,6 +57,23 @@ public class CustomerService {
 
     public void deleteCustomer(String id) {
     customerRepository.deleteById(id);
+
+    }
+
+
+
+    public CustomerDTO updateCustomer(String id, UpdateCustomerRequest customerRequest) {
+    Optional<Customer> customerOptional = customerRepository.findById(id);
+
+    customerOptional.ifPresent(customer -> {
+        customer.setName(customerRequest.getName());
+        customer.setDateOfBirth(customerRequest.getDateOfBirth());
+        customer.setCity(City.valueOf(customerRequest.getCity().name()));
+        customer.setAddress(customerRequest.getAddress());
+        customerRepository.save(customer);
+    });
+    return customerOptional.map(customerDtoConverter::toCustomerDTO)
+            .orElse(new CustomerDTO());
 
     }
 
