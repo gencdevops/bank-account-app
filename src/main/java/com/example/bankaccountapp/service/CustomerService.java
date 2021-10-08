@@ -77,4 +77,8 @@ public class CustomerService {
 
     }
 
+    protected Customer getCustomersById(String id) {
+        return customerRepository.findById(id).orElse(new Customer());
+    }
+
 }
