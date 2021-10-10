@@ -73,9 +73,29 @@ public class AccountServiceTest {
         Mockito.verify(accountDtoConverter).toAccountDTO(account);
 
 
+    }
 
+    @Test
+    public void whenCreateAccountCalledWithNonExistCustomer_itShouldReturnEmptyAccountDto() {
+        CreateAccountRequest createAccountRequest = new CreateAccountRequest();
+        createAccountRequest.setId("1234");
+        createAccountRequest.setCustomerId("12345");
+        createAccountRequest.setBalance(100.0);
+        createAccountRequest.setCity(City.ISTANBUL);
+        createAccountRequest.setCurrency(Currency.TRY);
+
+        Mockito.when(customerService.getCustomersById("12345")).thenReturn(Customer.builder().build());
+
+        AccountDTO expectedAccountDto = AccountDTO.builder().build();
+        AccountDTO result = accountService.createAccount(createAccountRequest);
+
+        Assert.assertEquals(result, expectedAccountDto);
+
+        Mockito.verifyNoInteractions(accountRepository);
+        Mockito.verifyNoInteractions(accountDtoConverter);
 
     }
+
 
 
 }

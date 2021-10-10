@@ -31,7 +31,7 @@ public class AccountService {
 
     public AccountDTO createAccount(CreateAccountRequest createAccountRequest) {
         Customer customer = customerService.getCustomersById(createAccountRequest.getCustomerId());
-        if (customer.getId() == null || customer.getId().equals(""))
+        if (customer.getId() == null || customer.getId().trim().equals(""))
             return AccountDTO.builder().build();
 
         Account account = Account.builder()

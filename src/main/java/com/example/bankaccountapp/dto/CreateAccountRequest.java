@@ -3,12 +3,13 @@ package com.example.bankaccountapp.dto;
 
 import com.example.bankaccountapp.model.City;
 import com.example.bankaccountapp.model.Currency;
-import lombok.Builder;
+import com.sun.istack.NotNull;
 
 
+public class CreateAccountRequest extends BaseAccountRequest {
 
-public class CreateAccountRequest extends BaseAccountRequest{
-private String id;
+@NotNull
+    private String id;
 
     public CreateAccountRequest() {
 
