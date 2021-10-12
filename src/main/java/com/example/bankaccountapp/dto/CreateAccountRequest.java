@@ -3,12 +3,14 @@ package com.example.bankaccountapp.dto;
 
 import com.example.bankaccountapp.model.City;
 import com.example.bankaccountapp.model.Currency;
-import com.sun.istack.NotNull;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 public class CreateAccountRequest extends BaseAccountRequest {
 
-@NotNull
+    @NotBlank(message = "Account id must be empty")
     private String id;
 
     public CreateAccountRequest() {

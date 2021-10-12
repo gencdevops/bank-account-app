@@ -3,12 +3,24 @@ package com.example.bankaccountapp.dto;
 import com.example.bankaccountapp.model.City;
 import com.example.bankaccountapp.model.Currency;
 
-public class BaseAccountRequest {
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+public class BaseAccountRequest {
+    @NotBlank(message = "Customer id must not be null")
     private String customerId;
+
+    @NotNull
+    @Min(0)
     private Double balance;
-    private City city;
+
+    @NotNull(message = "Currency must not be null")
     private Currency currency;
+
+    @NotNull(message = "City must not be null")
+    private City city;
+
 
     public BaseAccountRequest() {
 

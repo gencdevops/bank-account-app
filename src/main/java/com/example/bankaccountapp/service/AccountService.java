@@ -7,6 +7,7 @@ import com.example.bankaccountapp.dto.UpdateAccountRequest;
 import com.example.bankaccountapp.model.Account;
 import com.example.bankaccountapp.model.Customer;
 import com.example.bankaccountapp.repository.AccountRepository;
+import exception.CustomerNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class AccountService {
     public AccountDTO createAccount(CreateAccountRequest createAccountRequest) {
         Customer customer = customerService.getCustomersById(createAccountRequest.getCustomerId());
         if (customer.getId() == null || customer.getId().trim().equals(""))
-            return AccountDTO.builder().build();
+           throw new CustomerNotFoundException("Customer Not Found");
 
         Account account = Account.builder()
                 .id(createAccountRequest.getId())
