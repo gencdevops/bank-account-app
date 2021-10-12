@@ -2,6 +2,7 @@ package com.example.bankaccountapp.controller;
 
 import com.example.bankaccountapp.dto.AccountDTO;
 import com.example.bankaccountapp.dto.CreateAccountRequest;
+import com.example.bankaccountapp.dto.MoneyTransferRequest;
 import com.example.bankaccountapp.dto.UpdateAccountRequest;
 import com.example.bankaccountapp.service.AccountService;
 import org.springframework.http.ResponseEntity;
