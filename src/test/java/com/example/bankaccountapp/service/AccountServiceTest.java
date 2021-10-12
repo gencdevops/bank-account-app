@@ -19,15 +19,7 @@ public class AccountServiceTest {
     private AccountDtoConverter accountDtoConverter;
 
 
-    @org.junit.Before
-    public void setUp() throws Exception {
-        accountRepository = Mockito.mock(AccountRepository.class);
-        customerService = Mockito.mock(CustomerService.class);
-        accountDtoConverter = Mockito.mock(AccountDtoConverter.class);
 
-        accountService = new AccountService(accountRepository, customerService, accountDtoConverter);
-
-    }
 
     @Test
     public void whenCreateAccountCalledWithValidRequest_itShouldReturnValidAccountDto() {

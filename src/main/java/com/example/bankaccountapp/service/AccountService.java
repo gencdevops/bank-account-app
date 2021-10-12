@@ -8,6 +8,7 @@ import com.example.bankaccountapp.model.Account;
 import com.example.bankaccountapp.model.Customer;
 import com.example.bankaccountapp.repository.AccountRepository;
 import exception.CustomerNotFoundException;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,13 +22,16 @@ public class AccountService {
     private final CustomerService customerService;
     private final AccountDtoConverter accountDtoConverter;
 
+    private final AmqpTemplate rabbitTemplate;
 
     public AccountService(AccountRepository accountRepository,
                           CustomerService customerService,
-                          AccountDtoConverter accountDtoConverter) {
+                          AccountDtoConverter accountDtoConverter,
+                          AmqpTemplate rabbitTemplate) {
         this.accountRepository = accountRepository;
         this.customerService = customerService;
         this.accountDtoConverter = accountDtoConverter;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     public AccountDTO createAccount(CreateAccountRequest createAccountRequest) {
@@ -102,6 +106,10 @@ public class AccountService {
         });
 
         return accountOpt.map(accountDtoConverter::toAccountDTO).orElse(new AccountDTO());
+    }
+
+    public void transferMoney(MoneyTransferRequest transferRequest){
+        rabbitTemplate.convertAndSend(exchange.getName(), routingKey, transferRequest);
     }
 
 
